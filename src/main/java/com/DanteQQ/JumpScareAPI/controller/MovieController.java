@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MovieController {
     @Autowired
     MovieRepository movieRepository;
-    @PostMapping
+    @PostMapping("/movies")
     public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
         Movie savedMovie = movieRepository.save(movie);
         return new ResponseEntity<>(savedMovie, HttpStatus.CREATED);
