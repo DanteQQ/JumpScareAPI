@@ -37,6 +37,7 @@ public class Movie {
     public void setId(int id) {
         this.id = id;
     }
+
     public String getLink() {
         return link;
     }

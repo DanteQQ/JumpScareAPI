@@ -17,6 +17,7 @@ public class JumpScareTime {
 
     public JumpScareTime() {
     }
+
     public JumpScareTime(int id, int movieId, String time, String text, boolean strong) {
         this.id = id;
         this.movieId = movieId;
