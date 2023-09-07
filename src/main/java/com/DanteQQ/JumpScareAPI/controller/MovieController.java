@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class MovieController {
@@ -20,23 +19,18 @@ public class MovieController {
         return ResponseEntity.ok(savedMovie);
     }
 
-    @GetMapping("/movies/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable int id) {
-        Optional<Movie> movie = movieRepository.findById(id);
-        if (movie.isPresent()) {
-            return ResponseEntity.ok(movie.get());
+    @GetMapping("/movies")
+    public ResponseEntity<List<Movie>> getMoviesByName(@RequestParam(value = "movieName", required = false) String movieName) {
+        if (movieName != null && !movieName.isEmpty()) {
+            List<Movie> movies = movieRepository.findByMovieNameContainingIgnoreCase(movieName);
+            if (!movies.isEmpty()) {
+                return ResponseEntity.ok(movies);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
         } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @GetMapping("/name/{movieName}")
-    public ResponseEntity<Long> getMovieIdByName(@PathVariable String movieName) {
-        Long movieId = movieRepository.getIdByMovieName(movieName);
-        if (movieId != null) {
-            return ResponseEntity.ok(movieId);
-        } else {
-            return ResponseEntity.notFound().build();
+            List<Movie> movies = movieRepository.findAll();
+            return ResponseEntity.ok(movies);
         }
     }
 
@@ -44,11 +38,5 @@ public class MovieController {
     public ResponseEntity<Void> deleteMovieById(@PathVariable Long id) {
         movieRepository.deleteById(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/movies")
-    public ResponseEntity<List<Movie>> getAllMovies() {
-        List<Movie> movies = movieRepository.findAll();
-        return ResponseEntity.ok(movies);
     }
 }

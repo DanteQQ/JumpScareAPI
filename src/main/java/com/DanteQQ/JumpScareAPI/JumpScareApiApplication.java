@@ -9,5 +9,4 @@ public class JumpScareApiApplication {
     public static void main(String[] args) {
         SpringApplication.run(JumpScareApiApplication.class, args);
     }
-
 }

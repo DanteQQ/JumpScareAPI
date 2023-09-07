@@ -1,14 +1,19 @@
 package com.DanteQQ.JumpScareAPI.model;
 
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import static io.swagger.v3.oas.annotations.media.Schema.AccessMode.READ_ONLY;
+
 @Entity(name = "jumpScareTimes")
 public class JumpScareTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(accessMode = READ_ONLY)
     private int id;
     private int movieId;
     private String time;

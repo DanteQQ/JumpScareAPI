@@ -21,19 +21,8 @@ public class JumpScareTimeController {
     }
 
     @GetMapping("/jumpScareTimes")
-    public ResponseEntity<List<JumpScareTime>> getAllJumpScareTimes() {
-        List<JumpScareTime> jumpScareTimes = jumpScareTimeRepository.findAll();
-        return ResponseEntity.ok(jumpScareTimes);
-    }
-
-    @GetMapping("/jumpScareTimes/{id}")
-    public ResponseEntity<JumpScareTime> getJumpScareTimeById(@PathVariable int id) {
-        Optional<JumpScareTime> jumpScareTime = jumpScareTimeRepository.findById(id);
-        if (jumpScareTime.isPresent()) {
-            return ResponseEntity.ok(jumpScareTime.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public List<JumpScareTime> findByMovieId(@RequestParam(value = "movieId") int movieId) {
+        return jumpScareTimeRepository.findByMovieId(movieId);
     }
 
     @DeleteMapping("/jumpScareTimes/{id}")

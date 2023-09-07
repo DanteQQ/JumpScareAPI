@@ -10,8 +10,5 @@ import java.util.Optional;
 @Repository
 public interface JumpScareTimeRepository extends JpaRepository<JumpScareTime, Integer> {
     void deleteById(Long id);
-
-    List<JumpScareTime> findAll();
-
-    Optional<JumpScareTime> findById(int id);
+    List<JumpScareTime> findByMovieId(int movieId);
 }
