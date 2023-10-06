@@ -4,6 +4,7 @@ import com.DanteQQ.JumpScareAPI.model.JumpScareTime;
 import com.DanteQQ.JumpScareAPI.repository.JumpScareTimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class JumpScareTimeController {
     }
 
     @DeleteMapping("/jumpScareTimes/{id}")
+    @Transactional
     public ResponseEntity<Void> deleteJumpScareTimeById(@PathVariable Long id) {
         jumpScareTimeRepository.deleteById(id);
         return ResponseEntity.noContent().build();

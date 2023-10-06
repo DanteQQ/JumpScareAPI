@@ -4,6 +4,7 @@ import com.DanteQQ.JumpScareAPI.model.Movie;
 import com.DanteQQ.JumpScareAPI.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class MovieController {
     }
 
     @DeleteMapping("/movies/{id}")
+    @Transactional
     public ResponseEntity<Void> deleteMovieById(@PathVariable Long id) {
         movieRepository.deleteById(id);
         return ResponseEntity.noContent().build();
